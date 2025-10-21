@@ -1,15 +1,3 @@
-# BahnAPI
-
-BahnAPI is a lightweight Python wrapper around the Deutsche Bahn Timetables API. It merges planned timetable data with live updates and exposes a concise, Pythonic interface.
-
-## Features
-
-- `requests`-based HTTP client with simple in-memory caching.
-- Unified departures API combining `/plan`, `/fchg`, and optional `/rchg` data.
-- Station lookup utilities for EVA numbers, DS100 codes, and name prefixes.
-- Declarative configuration via `bahnapi.configure(...)` or environment variables.
-- Ships with a small CLI demo (`bahnapi-test`) to try things quickly.
-
 ## Installation
 
 ```bash
@@ -34,22 +22,6 @@ bahnapi.configure(
 )
 ```
 
-### Environment variables
-
-```bash
-export DB_CLIENT_ID="YOUR_CLIENT_ID"
-export DB_API_KEY="YOUR_API_KEY"
-```
-
-On Windows PowerShell:
-
-```powershell
-$env:DB_CLIENT_ID="YOUR_CLIENT_ID"
-$env:DB_API_KEY="YOUR_API_KEY"
-```
-
-If neither option is used, any API call raises `bahnapi.exceptions.AuthenticationError`.
-
 ## Quick Start
 
 ```python
@@ -58,7 +30,7 @@ import bahnapi
 
 bahnapi.configure("YOUR_CLIENT_ID", "YOUR_API_KEY")
 
-now = dt.datetime.now(dt.timezone.utc)
+now = dt.datetime.now(dt.UTC)
 departures = bahnapi.get_departures(
     station_id="8011160",  # Berlin Hbf
     start_time=now,
@@ -95,21 +67,6 @@ if matches:
 
 Use `bahnapi.stations.resolve_station_eva(pattern)` to enforce a single match; it raises `StationLookupError` when ambiguous or missing.
 
-## Command Line Demo
-
-After installation, use the bundled helper:
-
-```bash
-bahnapi-test 8011160 --hours 1 --recent \
-    --client-id YOUR_CLIENT_ID --api-key YOUR_API_KEY
-```
-
-Useful options:
-
-- `--resolve` resolves a station pattern to an EVA number.
-- `--search` prints station matches and exits.
-- `--recent` merges `/rchg` responses for incremental updates.
-
 ## API Overview
 
 ```python
@@ -126,22 +83,10 @@ Exceptions live in `bahnapi.exceptions`:
 - `RateLimitError`
 - `StationLookupError`
 
-## Development
-
-```bash
-git clone https://github.com/YOUR_ORG/bahnapi.git
-cd bahnapi
-python -m venv .venv
-. .venv/bin/activate  # on Windows: .venv\Scripts\activate
-pip install -e .
-```
-
-Run `python test.py` to exercise the API with your credentials.
-
 ## License
 
 Released under the MIT License (see `LICENSE`).
 
 ## Acknowledgements
 
-This project is unaffiliated with Deutsche Bahn. It simply wraps the official Timetables API provided via the DB API Marketplace. Always consult the official documentation for rate limits and conditions.
+This project is unaffiliated with Deutsche Bahn. It simply wraps the official Timetables API provided via the DB API Marketplace. Always consult the official documentation for rate limits and conditions.*** End Patch
