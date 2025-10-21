@@ -39,7 +39,7 @@ dev = [
 bahnapi-test = "bahnapi.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/sebastianspeetzen/bahnapi"
+Homepage = "https://github.com/speetzial/bahnapi"
 
 [tool.setuptools.packages.find]
 where = ["src"]
